@@ -3,7 +3,7 @@ services:
   web_nginx:
     build: ./nginx
     ports:
-      - "8888:80"
+      - "8000:80"
       - "443:443"
     volumes:
       # source
