@@ -19,6 +19,8 @@ services:
     expose:
       - "9000"
     volumes:
+      - ./php72-fpm/php.ini:/usr/local/etc/php/php.ini:ro
+      - ./php72-fpm/www.conf:/usr/local/etc/php-fpm.d/www.conf:rw
       - ./www/:/usr/share/nginx/html/
     # links:
     #   - web_redis
