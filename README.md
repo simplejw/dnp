@@ -1,8 +1,13 @@
 # dnp
-docker + nginx + php72-fpm
+# nginx + php72-fpm + redis
+
+
+Requirements
+    MacOS + Docker
+    
 
 run command:
 
-docker-compose build
+    docker-compose build
 
-docker-compose up -d
+    docker-compose up -d
