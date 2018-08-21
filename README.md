@@ -2,7 +2,8 @@
 # nginx + php72-fpm + redis
 
 
-Requirements
+Requirements:
+
     MacOS + Docker
     
 
