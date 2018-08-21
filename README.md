@@ -1,5 +1,4 @@
-# dnp
-# nginx + php72-fpm + redis
+# Docker  nginx + php72-fpm + redis
 
 
 Requirements:
