@@ -1,5 +1,5 @@
 version: '3'
-services:  
+services:
   web_nginx:
     build: ./nginx
     ports:
@@ -9,7 +9,7 @@ services:
       # source
       - ./www/:/usr/share/nginx/html/
       - ./nginx/www.conf:/etc/nginx/conf.d/default.conf:ro
-      - ./nginx/basic.conf:/etc/nginx/conf.d/basic.conf:ro
+      - ./nginx/sheying.conf:/etc/nginx/conf.d/sheying.conf:ro
       - ./nginx/:/var/log/nginx/:rw
     # links:
     #   - web_php72_fpm
