@@ -11,6 +11,7 @@ services:
       - ./nginx/www.conf:/etc/nginx/conf.d/default.conf:ro
       - ./nginx/sheying.conf:/etc/nginx/conf.d/sheying.conf:ro
       - ./nginx/:/var/log/nginx/:rw
+      - ./nginx/certs/:/etc/ssl/certs/:ro
     # links:
     #   - web_php72_fpm
     networks:
