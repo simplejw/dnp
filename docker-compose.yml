@@ -8,10 +8,9 @@ services:
     volumes:
       # source
       - ./www/:/usr/share/nginx/html/
-      - ./nginx/www.conf:/etc/nginx/conf.d/default.conf:ro
-      - ./nginx/sheying.conf:/etc/nginx/conf.d/sheying.conf:ro
-      - ./nginx/:/var/log/nginx/:rw
+      - ./nginx/log/:/var/log/nginx/:rw
       - ./nginx/certs/:/etc/ssl/certs/:ro
+      - ./nginx/conf/:/etc/nginx/conf.d/:ro
     # links:
     #   - web_php72_fpm
     networks:
@@ -23,7 +22,7 @@ services:
       - "9000"
     volumes:
       - ./php72-fpm/php.ini:/usr/local/etc/php/php.ini:ro
-      - ./php72-fpm/www.conf:/usr/local/etc/php-fpm.d/www.conf:rw
+      - ./php72-fpm/www.conf:/usr/local/etc/php-fpm.d/www.conf:ro
       - ./www/:/usr/share/nginx/html/
     # links:
     #   - web_redis
