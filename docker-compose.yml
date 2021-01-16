@@ -11,8 +11,6 @@ services:
       - ./nginx/log/:/var/log/nginx/:rw
       - ./nginx/certs/:/etc/ssl/certs/:ro
       - ./nginx/conf/:/etc/nginx/conf.d/:ro
-    # links:
-    #   - web_php72_fpm
     networks:
         - net-php72-fpm
 
@@ -24,8 +22,6 @@ services:
       - ./php72-fpm/php.ini:/usr/local/etc/php/php.ini:ro
       - ./php72-fpm/www.conf:/usr/local/etc/php-fpm.d/www.conf:ro
       - ./www/:/usr/share/nginx/html/
-    # links:
-    #   - web_redis
     networks:
         - net-php72-fpm
         - net-redis
