@@ -1,0 +1,68 @@
+version: '3'
+services:
+  web_nginx:
+    build: ./nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      # source
+      - ./www/:/usr/share/nginx/html/
+      - ./nginx/log/:/var/log/nginx/:rw
+      - ./nginx/certs/:/etc/ssl/certs/:ro
+      - ./nginx/conf/:/etc/nginx/conf.d/:ro
+    networks:
+        - frontend
+
+  web_php_fpm:
+    build: ./php-fpm
+    expose:
+      - "9000"
+      - "9003"
+    volumes:
+      - ./php-fpm/php.ini:/usr/local/etc/php/php.ini:ro
+      - ./php-fpm/www.conf:/usr/local/etc/php-fpm.d/www.conf:ro
+      - ./php-fpm/tmp/:/tmp/
+      - ./www/:/usr/share/nginx/html/
+    networks:
+        - frontend
+        - backend
+
+  web_redis:
+    build: ./redis
+    ports:
+      - "6379:6379"
+    volumes:
+      # source
+      - ./redis/redis.conf:/usr/local/etc/redis/redis.conf:ro
+    networks:
+        - backend
+
+  elasticsearch:
+    image: elasticsearch:7.8.1
+    container_name: elasticsearch_781
+    environment:
+      - node.name=es-node
+      - cluster.name=es-cluster
+      - discovery.type=single-node
+    volumes:
+      - ./elasticsearch/esdata:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+      - 9300:9300
+    networks:
+      - frontend
+
+  kibana:
+    image: kibana:7.8.1
+    container_name: kibana_781
+    ports:
+      - 5601:5601
+    networks:
+      - frontend
+
+networks:
+  frontend:
+  backend:
+    external:
+      name: database_net-database
