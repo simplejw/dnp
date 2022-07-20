@@ -18,7 +18,6 @@ services:
     build: ./php-fpm
     expose:
       - "9000"
-      - "9003"
     volumes:
       - ./php-fpm/php.ini:/usr/local/etc/php/php.ini:ro
       - ./php-fpm/www.conf:/usr/local/etc/php-fpm.d/www.conf:ro
@@ -38,31 +37,6 @@ services:
     networks:
         - backend
 
-  elasticsearch:
-    image: elasticsearch:7.8.1
-    container_name: elasticsearch_781
-    environment:
-      - node.name=es-node
-      - cluster.name=es-cluster
-      - discovery.type=single-node
-    volumes:
-      - ./elasticsearch/esdata:/usr/share/elasticsearch/data
-    ports:
-      - 9200:9200
-      - 9300:9300
-    networks:
-      - frontend
-
-  kibana:
-    image: kibana:7.8.1
-    container_name: kibana_781
-    ports:
-      - 5601:5601
-    networks:
-      - frontend
-
 networks:
   frontend:
   backend:
-    external:
-      name: database_net-database
